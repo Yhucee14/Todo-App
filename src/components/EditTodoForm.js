@@ -1,8 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-const EditTodoForm = () => {
+const EditTodoForm = ({editTodo, task}) => {
+  const [value, setValue] = useState(task.task)
+
+  const handleSubmit = e => {
+    e.preventDefault(); //prevents page from reloading by default when you submit forms
+    editTodo(value, task.id)
+
+    setValue("")
+  }
+
   return (
-    <div>EditTodoForm</div>
+    <form className='TodoForm' onSubmit={handleSubmit}>
+      <input type='text' className='todo-input' value={value} 
+      placeholder='Update task?' 
+      onChange={(e) => setValue(e.target.value)}/>
+      <button type='select' className='todo-btn'>
+        Update Task
+      </button>
+    </form>
   )
 }
 
